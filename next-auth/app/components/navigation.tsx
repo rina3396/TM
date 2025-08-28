@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import type { Session } from '@supabase/auth-helpers-nextjs'
 
@@ -24,7 +26,6 @@ const Navigation = ({ session }: { session: Session | null }) => {
                             <Link href="/auth/signup">サインアップ</Link>
                         </div>
                     )}
-
                 </div>
             </div>
         </header>
