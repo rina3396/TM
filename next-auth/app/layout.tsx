@@ -1,4 +1,4 @@
-import './globals. css'
+import './globals.css'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang='jp'>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <main className="flex-1 container max-w-screen-sm mx-auto px-1 py-5">{children}</main>
