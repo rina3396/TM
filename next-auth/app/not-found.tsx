@@ -1,3 +1,5 @@
+"use client"
+
 //404画面
 const notFound = ()=>{
     return(
