@@ -1,4 +1,4 @@
-// next.config.ts（JSなら module.exports = {...} でもOK）
+// next.config.ts
 const nextConfig = {
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,

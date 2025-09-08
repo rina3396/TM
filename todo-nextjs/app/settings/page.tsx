@@ -1,3 +1,5 @@
+//setting/page.tsx
+//ログイン後の画面
 import { createServer } from '@/lib/supabase/server';
 
 export default async function SettingsPage() {

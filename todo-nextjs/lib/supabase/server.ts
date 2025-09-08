@@ -1,25 +1,17 @@
+// lib/supabase/server.ts（←これは env.ts を使ってOK）
 import { cookies } from 'next/headers';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/env';
 
-// ★ async を外す
 export function createServer() {
     const cookieStore = cookies();
-
-    return createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, // or PUBLISHABLE_KEY
-        {
-            cookies: {
-                get(name: string) {
-                    return cookieStore.get(name)?.value;
-                },
-                set(name: string, value: string, options: CookieOptions) {
-                    cookieStore.set({ name, value, ...options });
-                },
-                remove(name: string, options: CookieOptions) {
-                    cookieStore.set({ name, value: '', ...options });
-                },
-            },
-        }
-    );
+    return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        cookies: {
+            get: (name: string) => cookieStore.get(name)?.value,
+            set: (name: string, value: string, options: CookieOptions) =>
+                cookieStore.set({ name, value, ...options }),
+            remove: (name: string, options: CookieOptions) =>
+                cookieStore.set({ name, value: '', ...options }),
+        },
+    });
 }

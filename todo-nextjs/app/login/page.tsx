@@ -1,3 +1,4 @@
+//logiin/page.tsx
 import { createServer } from '@/lib/supabase/server';
 import Link from 'next/link';
 import AuthForm from '@/components/AuthForm';
