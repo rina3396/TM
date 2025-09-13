@@ -19,18 +19,30 @@ export default function AuthForm({ mode }: { mode: Mode }) {
         e.preventDefault();
         setPending(true);
         setMsg(null);
+
         try {
             if (mode === 'signup') {
-                const { error } = await supabase.auth.signUp({ email, password });
+                const { data, error } = await supabase.auth.signUp({ email, password });
                 if (error) throw error;
+
+                // 環境によってはサインアップ直後にセッションが返る（メール確認不要な設定など）
+                if (data.session) {
+                    router.replace('/todos'); // ここを / から /todos に変更
+                    router.refresh();
+                    return;
+                }
+
                 setMsg('確認メールを送信しました。受信ボックスを確認してください。');
             } else {
                 const { error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-                router.replace('/'); // ログイン後にホームへ
+
+                // ログイン成功 → TODO に遷移
+                router.replace('/todos'); // ここを / から /todos に変更
+                router.refresh();         // サーバー側のセッション依存UIを即時反映
             }
         } catch (err: any) {
-            setMsg(err.message ?? 'エラーが発生しました');
+            setMsg(err?.message ?? 'エラーが発生しました');
         } finally {
             setPending(false);
         }
