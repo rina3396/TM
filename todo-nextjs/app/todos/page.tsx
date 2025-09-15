@@ -1,3 +1,4 @@
+//TODO一覧画面
 import Link from 'next/link'
 import { createServer } from '@/lib/supabase/server'
 import { toggleDone, deleteTodo } from './actions'
@@ -45,7 +46,7 @@ export default async function TodoListPage() {
                             action={async () => { 'use server'; await toggleDone(t.id, !t.done) }}
                         >
                             <button className="rounded border px-3 py-1">
-                                {t.done ? '未完了に' : '完了に'}
+                                {t.done ? '未完了' : '完了'}
                             </button>
 
                             {/* 削除は formAction で別アクションを割り当て */}
