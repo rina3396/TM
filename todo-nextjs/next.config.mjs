@@ -7,7 +7,6 @@
 // };
 // export default nextConfig;
 
-// next.config.js
 // next.config.mjs
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
