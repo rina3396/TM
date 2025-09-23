@@ -1,3 +1,4 @@
+//TODO一覧画面
 import Link from 'next/link'
 import { createServer } from '@/lib/supabase/server'
 import { toggleDone, deleteTodo } from './actions'
@@ -39,13 +40,26 @@ export default async function TodoListPage() {
                             {t.description && <p className="text-sm text-gray-600">{t.description}</p>}
                         </div>
 
-                        <form className="flex items-center gap-2"
-                            action={async () => { 'use server'; await toggleDone(t.id, !t.done) }}>
-                            <button className="rounded border px-3 py-1">{t.done ? '未完了に' : '完了に'}</button>
-                            <form action={async () => { 'use server'; await deleteTodo(t.id) }}>
-                                <button className="rounded border px-3 py-1 text-red-600">削除</button>
-                            </form>
-                            <Link className="rounded border px-3 py-1" href={`/todos/${t.id}/edit`}>編集</Link>
+                        {/* フォームは1つ。既定の action は toggleDone */}
+                        <form
+                            className="flex items-center gap-2"
+                            action={async () => { 'use server'; await toggleDone(t.id, !t.done) }}
+                        >
+                            <button className="rounded border px-3 py-1">
+                                {t.done ? '未完了' : '完了'}
+                            </button>
+
+                            {/* 削除は formAction で別アクションを割り当て */}
+                            <button
+                                className="rounded border px-3 py-1 text-red-600"
+                                formAction={async () => { 'use server'; await deleteTodo(t.id) }}
+                            >
+                                削除
+                            </button>
+
+                            <Link className="rounded border px-3 py-1" href={`/todos/${t.id}/edit`}>
+                                編集
+                            </Link>
                         </form>
                     </li>
                 ))}
