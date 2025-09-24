@@ -1,0 +1,10 @@
+/* styles/globals.css（BeerCSS 用） */
+:root {
+--brand: #0ea5e9; /* アクセント色（任意） */
+}
+html, body {
+background: #fff;
+color: #1f2937;
+}
+/* 必要に応じて微調整 */
+section.page { margin: 1rem 0; }
