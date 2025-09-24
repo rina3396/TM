@@ -1,10 +1,18 @@
-/* styles/globals.css（BeerCSS 用） */
-:root {
---brand: #0ea5e9; /* アクセント色（任意） */
+/* styles/globals.css */
+@import "tailwindcss";
+
+/* v4 では @theme を使って色やフォントを定義できます */
+@theme {
+    --color-background: #ffffff;
+    --color-foreground: #111827;
+    /* gray-900 */
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
-html, body {
-background: #fff;
-color: #1f2937;
+
+/* body や html のベース設定 */
+html,
+body {
+    @apply bg-background text-foreground font-sans;
+    min-height: 100%;
 }
-/* 必要に応じて微調整 */
-section.page { margin: 1rem 0; }
