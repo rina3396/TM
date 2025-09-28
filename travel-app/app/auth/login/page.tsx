@@ -2,17 +2,27 @@
 "use client"
 // フォーム送信や OAuth ボタンなどクライアント処理用
 import { useState } from "react"
-// import { createClient } from "@/lib/supabase/client"
+import { createClient } from "@/lib/supabase/client"
 
 
 export default function LoginPage() {
     const [email, setEmail] = useState("")
-    // const supabase = createClient()
+    const supabase = createClient()
 
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         // TODO: Supabase でメールログイン or OAuth
+        // supabaseの機能を使用して、メールでログインする
+        // client.tsでsupabaseのURLを呼び出し
+        const { error } = await supabase.auth.signInWithOtp({ email })
+
+        //ログインエラー時の処理
+        if (error) {
+            alert("ログインエラー: " + error.message)
+        } else {
+            alert("確認用のメールを送信しました。受信トレイを確認してください。")
+        }
         // await supabase.auth.signInWithOtp({ email })
     }
 
